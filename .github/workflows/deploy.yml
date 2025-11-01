@@ -50,8 +50,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload dist folder
-          path: './dist/ahorcado-game'
+          # Upload browser folder from dist
+          path: './dist/ahorcado-game/browser'
       
       - name: Deploy to GitHub Pages
         id: deployment
