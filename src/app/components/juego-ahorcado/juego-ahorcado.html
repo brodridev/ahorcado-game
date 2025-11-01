@@ -1,0 +1,119 @@
+<!-- Juego de Ahorcado -->
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 transition-theme">
+  <div class="container mx-auto px-4 py-8">
+    
+    <!-- Header con título y botón de tema -->
+    <header class="flex justify-between items-center mb-8">
+      <h1 class="text-4xl font-bold text-primary-800 dark:text-primary-200">
+        🎯 Juego del Ahorcado
+      </h1>
+      
+      <button 
+        (click)="toggleTheme()"
+        class="p-3 rounded-full bg-primary-600 hover:bg-primary-700 text-white 
+               transition-colors duration-200 shadow-lg hover:shadow-xl">
+        @if (isDarkMode()) {
+          <span class="text-xl">☀️</span>
+        } @else {
+          <span class="text-xl">🌙</span>
+        }
+      </button>
+    </header>
+
+    <!-- Área principal del juego -->
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- Panel de información -->
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 mb-8 transition-theme">
+        <div class="flex justify-between items-center mb-4">
+          <div class="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            Errores: {{ estadoJuego().errores }} / {{ estadoJuego().maxErrores }}
+          </div>
+          <div class="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            Letras usadas: {{ estadoJuego().letrasUsadas.length }}
+          </div>
+        </div>
+        
+        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-4">
+          <div 
+            class="bg-gradient-to-r from-red-500 to-red-600 h-3 rounded-full transition-all duration-500"
+            [style.width.%]="(estadoJuego().errores / estadoJuego().maxErrores) * 100">
+          </div>
+        </div>
+      </div>
+
+      <!-- Área del juego -->
+      <div class="grid lg:grid-cols-2 gap-8 mb-8">
+        
+        <!-- Muñeco del ahorcado -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 transition-theme">
+          <h2 class="text-2xl font-bold text-center mb-4 text-gray-800 dark:text-gray-200">
+            Horca
+          </h2>
+          <app-muneco-ahorcado [errores]="estadoJuego().errores" />
+        </div>
+
+        <!-- Palabra y controles -->
+        <div class="space-y-6">
+          
+          <!-- Palabra a adivinar -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 transition-theme">
+            <h2 class="text-2xl font-bold text-center mb-6 text-gray-800 dark:text-gray-200">
+              Palabra
+            </h2>
+            
+            <div class="flex justify-center gap-2 flex-wrap mb-6">
+              @for (letra of estadoJuego().palabraMostrada; track $index) {
+                <div class="w-12 h-12 border-b-4 border-primary-600 flex items-center 
+                           justify-center text-2xl font-bold text-primary-800 
+                           dark:text-primary-200 animate-slide-in">
+                  {{ letra }}
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Mensaje de resultado -->
+          @if (estadoJuego().juegoTerminado) {
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 text-center transition-theme">
+              <div class="text-3xl mb-2">
+                @if (estadoJuego().juegoGanado) {
+                  🎉
+                } @else {
+                  😢
+                }
+              </div>
+              <p class="text-xl font-bold mb-4" [class]="getColorMensaje()">
+                {{ getMensajeFinal() }}
+              </p>
+              <button 
+                (click)="nuevaPartida()"
+                class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white 
+                       rounded-lg font-semibold transition-colors duration-200 
+                       shadow-lg hover:shadow-xl">
+                🔄 Nueva Partida
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Teclado Virtual -->
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 transition-theme">
+        <h2 class="text-2xl font-bold text-center mb-6 text-gray-800 dark:text-gray-200">
+          Teclado
+        </h2>
+        
+        <app-teclado 
+          [letrasUsadas]="estadoJuego().letrasUsadas"
+          [juegoTerminado]="estadoJuego().juegoTerminado"
+          (letraSeleccionada)="onLetraSeleccionada($event)" />
+        
+        <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
+          💡 También puedes usar tu teclado físico • Presiona Enter para nueva partida
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>

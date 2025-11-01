@@ -1,0 +1,63 @@
+<!-- Muñeco del Ahorcado Animado -->
+<div class="flex justify-center items-center p-8">
+  <svg width="200" height="250" viewBox="0 0 200 250" class="animate-fade-in text-primary-600 dark:text-white">
+    <!-- Horca base -->
+    @if (partesVisible[0]) {
+      <g class="animate-slide-in">
+        <!-- Base -->
+        <line x1="10" y1="230" x2="50" y2="230" stroke="currentColor" stroke-width="4"/>
+        <!-- Poste vertical -->
+        <line x1="30" y1="230" x2="30" y2="20" stroke="currentColor" stroke-width="4"/>
+        <!-- Poste horizontal -->
+        <line x1="30" y1="20" x2="120" y2="20" stroke="currentColor" stroke-width="4"/>
+        <!-- Cuerda -->
+        <line x1="120" y1="20" x2="120" y2="50" stroke="currentColor" stroke-width="3"/>
+      </g>
+    }
+    
+    <!-- Cabeza -->
+    @if (partesVisible[1]) {
+      <circle cx="120" cy="65" r="15" fill="none" stroke="currentColor" stroke-width="3" 
+              class="animate-fade-in"/>
+    }
+    
+    <!-- Cuerpo -->
+    @if (partesVisible[2]) {
+      <line x1="120" y1="80" x2="120" y2="150" stroke="currentColor" stroke-width="3"
+            class="animate-slide-in"/>
+    }
+    
+    <!-- Brazo izquierdo -->
+    @if (partesVisible[3]) {
+      <line x1="120" y1="100" x2="95" y2="125" stroke="currentColor" stroke-width="3"
+            class="animate-swing origin-[120px_100px]"/>
+    }
+    
+    <!-- Brazo derecho -->
+    @if (partesVisible[4]) {
+      <line x1="120" y1="100" x2="145" y2="125" stroke="currentColor" stroke-width="3"
+            class="animate-swing origin-[120px_100px]"/>
+    }
+    
+    <!-- Piernas -->
+    @if (partesVisible[5]) {
+      <g class="animate-swing origin-[120px_150px]">
+        <!-- Pierna izquierda -->
+        <line x1="120" y1="150" x2="95" y2="185" stroke="currentColor" stroke-width="3"/>
+        <!-- Pierna derecha -->
+        <line x1="120" y1="150" x2="145" y2="185" stroke="currentColor" stroke-width="3"/>
+      </g>
+    }
+    
+    <!-- Cara triste cuando el juego termine -->
+    @if (partesVisible[5]) {
+      <g class="animate-fade-in">
+        <!-- Ojos -->
+        <circle cx="115" cy="62" r="2" fill="currentColor"/>
+        <circle cx="125" cy="62" r="2" fill="currentColor"/>
+        <!-- Boca triste -->
+        <path d="M 115 70 Q 120 75 125 70" stroke="currentColor" stroke-width="2" fill="none"/>
+      </g>
+    }
+  </svg>
+</div>

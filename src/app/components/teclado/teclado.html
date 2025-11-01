@@ -1,0 +1,18 @@
+<!-- Teclado Virtual -->
+<div class="space-y-2 select-none">
+  @for (fila of alfabeto; track $index) {
+    <div class="flex justify-center gap-1">
+      @for (letra of fila; track letra) {
+        <button
+          (click)="onLetraClick(letra)"
+          [disabled]="isLetraUsada(letra) || juegoTerminado()"
+          [class]="getClaseBoton(letra)"
+          class="w-10 h-10 rounded-lg font-bold text-sm transition-all duration-200 
+                 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 
+                 focus:ring-primary-500 focus:ring-offset-2">
+          {{ letra }}
+        </button>
+      }
+    </div>
+  }
+</div>
