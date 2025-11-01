@@ -79,7 +79,26 @@ src/app/
 
 - `ng serve` - Servidor de desarrollo
 - `ng build` - Compilar para producción
+- `npm run build:prod` - Compilar para producción con base-href para GitHub Pages
+- `npm run deploy` - Desplegar manualmente a GitHub Pages
 - `ng test` - Ejecutar pruebas unitarias
+
+## 🌐 Despliegue en GitHub Pages
+
+Este proyecto está configurado para desplegarse automáticamente en GitHub Pages usando GitHub Actions.
+
+### Configuración automática:
+1. Cada push a la rama `master` o `main` activa el workflow
+2. Se construye la aplicación automáticamente
+3. Se despliega en GitHub Pages
+
+### Despliegue manual:
+```bash
+npm run deploy
+```
+
+### URL de la aplicación:
+🎮 **[Jugar Ahorcado](https://brodridev.github.io/ahorcado-game/)**
 
 ## 📝 Notas
 
